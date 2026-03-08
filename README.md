@@ -48,6 +48,3 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 Accessible at: `http://localhost:3001`
-
-## 📝 License
-MIT
