@@ -2,7 +2,7 @@
 
 GateGPT is a specialized AI-powered platform designed to assist students preparing for the **GATE (Graduate Aptitude Test in Engineering)**. It provides a chatbot interface, subject exploration, and various prep modes tailored for engineering students.
 
-## � Prepared By
+## 🙌 Prepared By
 - **Sandheep G S** (CB.SC.U4CSE23144)
 - **Prajith Maharaja** (CB.SC.U4CSE23135)
 
@@ -21,11 +21,11 @@ The project is divided into two main components:
 - **Prep Modes**: Different interaction modes to aid in memory and practice.
 - **Secure Auth**: JWT-based authentication for user account management.
 
-## � Tech Stack
+## 💻 Tech Stack
 
 - **Frontend**: Next.js 14, React, Tailwind CSS, Zustand, Framer Motion.
 - **Backend**: Node.js, Express, Mongoose (MongoDB).
-- **AI Integration**: Google Generative AI (Gemini 3.1 Flash Lite / Gemini 3.5).
+- **AI Integration**: Google Generative AI (Gemini 1.5 Flash Lite / Gemini 1.5).
 - **Styling & Assets**: Lucide Icons, KaTeX (for math rendering).
 
 ## ⚙️ Getting Started
@@ -62,4 +62,3 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 The application will be accessible at `http://localhost:3001`.
-
