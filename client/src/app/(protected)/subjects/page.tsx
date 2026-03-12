@@ -5,7 +5,7 @@ import { useLearningStore } from '@/store/useLearningStore';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-const subjectIcons: { [key: string]: any } = {
+const subjectIcons: Record<string, React.ReactNode> = {
     'Operating Systems': <Layers />,
     'Algorithms': <Brain />,
     'Data Structures': <Database />,

@@ -8,10 +8,10 @@ import {
 import api from '@/lib/axios';
 
 export default function NotesPage() {
-    const [notes, setNotes] = useState<any[]>([]);
+    const [notes, setNotes] = useState<{ _id: string, title: string, content: string, subject: string, isBookmarked: boolean, createdAt: string }[]>([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true);
-    const [selectedNote, setSelectedNote] = useState<any>(null);
+    const [selectedNote, setSelectedNote] = useState<{ _id: string, title: string, content: string, subject: string, isBookmarked: boolean, createdAt: string } | null>(null);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [newNote, setNewNote] = useState({ title: '', content: '', subject: '' });
 
@@ -45,7 +45,7 @@ export default function NotesPage() {
 
     const handleDeleteNote = async (id: string, e: React.MouseEvent) => {
         e.stopPropagation();
-        if (window.confirm('Are you sure you want to delete this note?')) {
+        if (globalThis.confirm?.('Are you sure you want to delete this note?')) {
             try {
                 await api.delete(`/notes/${id}`);
                 fetchNotes();
@@ -56,7 +56,7 @@ export default function NotesPage() {
         }
     };
 
-    const toggleBookmark = async (note: any, e: React.MouseEvent) => {
+    const toggleBookmark = async (note: { _id: string, isBookmarked: boolean }, e: React.MouseEvent) => {
         e.stopPropagation();
         try {
             await api.patch(`/notes/${note._id}`, { isBookmarked: !note.isBookmarked });

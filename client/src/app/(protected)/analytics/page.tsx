@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import {
-    BarChart3, TrendingUp, PieChart, Activity,
+    BarChart3, Activity,
     ArrowUpRight, ArrowDownRight, Target, Brain, Award
 } from 'lucide-react';
 import api from '@/lib/axios';
@@ -11,8 +11,8 @@ import {
 } from 'recharts';
 
 export default function AnalyticsPage() {
-    const [data, setData] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<{ stats: Record<string, any>, results: any[] } | null>(null);
+    const [_loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAnalytics = async () => {
@@ -143,7 +143,7 @@ export default function AnalyticsPage() {
                                     contentStyle={{ backgroundColor: '#111827', border: '1px solid #374151', borderRadius: '12px' }}
                                 />
                                 <Bar dataKey="mastery" radius={[0, 4, 4, 0]} barSize={20}>
-                                    {subjectChartData.map((entry, index) => (
+                                    {subjectChartData.map((_entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Bar>
@@ -178,7 +178,7 @@ export default function AnalyticsPage() {
     );
 }
 
-function StatCard({ title, value, trend, icon, isUp, color = "text-white" }: { title: string, value: string, trend: string, icon: any, isUp: boolean, color?: string }) {
+function StatCard({ title, value, trend, icon, isUp, color = "text-white" }: { title: string, value: string, trend: string, icon: React.ReactNode, isUp: boolean, color?: string }) {
     return (
         <div className="bg-gray-900/40 border border-gray-800 p-6 rounded-3xl hover:border-gray-700 transition-all group">
             <div className="flex items-center justify-between mb-4">

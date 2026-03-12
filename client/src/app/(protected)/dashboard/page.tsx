@@ -1,8 +1,8 @@
 "use client";
 import { useAuthStore } from '@/store/useAuthStore';
 import {
-    LayoutDashboard, Zap, BookOpen, PenTool,
-    TrendingUp, Award, Clock, ArrowRight, Star
+    Zap, PenTool,
+    Award, Clock, ArrowRight, Star
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 

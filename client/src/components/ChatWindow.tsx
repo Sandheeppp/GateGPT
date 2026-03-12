@@ -58,7 +58,7 @@ export default function ChatWindow({ chatId }: { chatId?: string }) {
                         <h2 className="text-2xl font-bold text-gray-500">Ask your first question about GATE...</h2>
                     </div>
                 )}
-                {messages.map((msg: any) => (
+                {messages.map((msg: { _id: string, role: 'user' | 'assistant', content: string }) => (
                     <MessageBubble key={msg._id} message={msg} chatId={chatId} />
                 ))}
                 {loading && (

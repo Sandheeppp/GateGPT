@@ -1,14 +1,13 @@
 "use client";
 import Link from 'next/link';
 import {
-    Zap, Brain, BookOpen, PenTool,
-    Shield, ArrowRight, GraduationCap,
-    Code, BarChart3, Star, CheckCircle, FileText
+    Zap, BookOpen, PenTool,
+    Shield, ArrowRight,
+    BarChart3, Star, FileText
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function LandingPage() {
-    const router = useRouter();
 
     return (
         <div className="bg-[#050505] text-white min-h-screen selection:bg-blue-500/30">
@@ -173,7 +172,7 @@ export default function LandingPage() {
     );
 }
 
-function FeatureCard({ title, desc, icon, color }: { title: string, desc: string, icon: any, color: string }) {
+function FeatureCard({ title, desc, icon, color }: { title: string, desc: string, icon: React.ReactNode, color: string }) {
     return (
         <div className="p-10 bg-gray-900/40 border border-gray-800 rounded-3xl hover:border-gray-700 hover:bg-gray-900/60 transition-all group">
             <div className={`w-14 h-14 ${color}/10 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform`}>

@@ -29,9 +29,10 @@ export default function PyqSolver() {
             } else {
                 setError('AI could not generate a solution. Please try again with a clearer question.');
             }
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Failed to solve PYQ:', err);
-            setError(err.response?.data?.message || 'Failed to connect to AI engine. Please check your internet or try again later.');
+            const errorResponse = err as { response?: { data?: { message?: string } } };
+            setError(errorResponse.response?.data?.message || 'Failed to connect to AI engine. Please check your internet or try again later.');
         } finally {
             setLoading(false);
         }

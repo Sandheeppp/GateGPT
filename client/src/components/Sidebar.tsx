@@ -2,15 +2,15 @@ import { useEffect, useState, useMemo, memo } from 'react';
 import { useChatStore } from '@/store/useChatStore';
 import { useAuthStore } from '@/store/useAuthStore';
 import {
-    Plus, MessageSquare, Pin, Archive, Trash2, Search, LogOut,
-    Settings, MoreHorizontal, HelpCircle, LayoutDashboard,
-    BookOpen, PenTool, BarChart3, GraduationCap, FileText, UserCircle,
+    Plus, MessageSquare, Pin, Archive, Trash2, LogOut,
+    MoreHorizontal, HelpCircle, LayoutDashboard,
+    BookOpen, PenTool, BarChart3, GraduationCap, FileText,
     Shield, Bookmark
 } from 'lucide-react';
 import { useRouter, useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-const ChatItem = memo(function ChatItem({ chat, isActive }: { chat: any, isActive: boolean }) {
+const ChatItem = memo(function ChatItem({ chat, isActive }: { chat: { _id: string, title: string, isPinned: boolean }, isActive: boolean }) {
     const { deleteChat, pinChat, updateChat } = useChatStore();
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(chat.title);
@@ -21,7 +21,7 @@ const ChatItem = memo(function ChatItem({ chat, isActive }: { chat: any, isActiv
         action();
     };
 
-    const handleSave = async (e: any) => {
+    const handleSave = async (e: React.FormEvent | React.FocusEvent) => {
         e.preventDefault();
         await updateChat(chat._id, { title });
         setEditing(false);
@@ -59,7 +59,7 @@ const ChatItem = memo(function ChatItem({ chat, isActive }: { chat: any, isActiv
 const Sidebar = memo(function Sidebar() {
     const { chats, fetchChats, createChat } = useChatStore();
     const { user, logout } = useAuthStore();
-    const [search, setSearch] = useState('');
+    const search = '';
     const router = useRouter();
     const params = useParams();
     const pathname = usePathname();

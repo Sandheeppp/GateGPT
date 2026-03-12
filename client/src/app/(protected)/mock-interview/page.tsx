@@ -1,14 +1,14 @@
 "use client";
 import { useState, useRef, useEffect } from 'react';
 import {
-    Mic, Send, Brain, Shield,
-    Trophy, AlertCircle, Play, StopCircle, RefreshCcw
+    Mic, Send, Shield,
+    StopCircle, Play
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 export default function MockInterview() {
     const [started, setStarted] = useState(false);
-    const [messages, setMessages] = useState<any[]>([]);
+    const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
     const bottomRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,7 @@ export default function MockInterview() {
         ]);
     };
 
-    const handleSend = async (e?: React.FormEvent) => {
+    const handleSend = (e?: React.FormEvent) => {
         e?.preventDefault();
         if (!input.trim() || loading) return;
 

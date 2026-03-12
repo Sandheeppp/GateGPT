@@ -12,8 +12,8 @@ interface AuthState {
     token: string | null;
     setUser: (user: User | null) => void;
     setToken: (token: string | null) => void;
-    login: (userData: any) => Promise<void>;
-    signup: (userData: any) => Promise<void>;
+    login: (userData: object) => Promise<void>;
+    signup: (userData: object) => Promise<void>;
     logout: () => void;
 }
 

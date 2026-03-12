@@ -20,7 +20,7 @@ export default function PracticeMode() {
     const [difficulty, setDifficulty] = useState('Medium');
     const [timeLimit, setTimeLimit] = useState(10);
 
-    const [sessionQuestions, setSessionQuestions] = useState<any[]>([]);
+    const [sessionQuestions, setSessionQuestions] = useState<{ question: string, options: string[], correct: number, explanation?: string }[]>([]);
     const [currentIdx, setCurrentIdx] = useState(0);
     const [answers, setAnswers] = useState<number[]>([]);
     const [timeLeft, setTimeLeft] = useState(0);
@@ -32,7 +32,7 @@ export default function PracticeMode() {
     }, [fetchSubjects]);
 
     useEffect(() => {
-        let timer: any;
+        let timer: ReturnType<typeof setInterval>;
         if (started && timeLeft > 0 && !showResult) {
             timer = setInterval(() => {
                 setTimeLeft((prev) => prev - 1);
@@ -40,7 +40,9 @@ export default function PracticeMode() {
         } else if (timeLeft === 0 && started) {
             setShowResult(true);
         }
-        return () => clearInterval(timer);
+        return () => {
+            if (timer) clearInterval(timer);
+        };
     }, [started, timeLeft, showResult]);
 
     const handleStart = () => {
@@ -119,7 +121,7 @@ export default function PracticeMode() {
                             onChange={(e) => setSelectedSubject(e.target.value)}
                         >
                             <option value="">Choose a subject...</option>
-                            {subjects.map((s: any) => (
+                            {subjects.map((s: { name: string, questions?: any[] }) => (
                                 <option key={s.name} value={s.name}>{s.name} ({s.questions?.length || 0} Questions)</option>
                             ))}
                         </select>

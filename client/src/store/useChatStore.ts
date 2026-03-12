@@ -78,13 +78,14 @@ export const useChatStore = create<ChatState>((set, get) => ({
             set((state) => ({
                 messages: [...state.messages.filter(m => m._id !== tempMsg._id), tempMsg, data]
             }));
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(error);
+            const err = error as { response?: { data?: { message?: string } } };
             // Remove optimistic message and show error
             const errorMessage: Message = {
                 _id: Math.random().toString(),
                 role: 'assistant',
-                content: `Error: ${error.response?.data?.message || 'Failed to send message'}`,
+                content: `Error: ${err.response?.data?.message || 'Failed to send message'}`,
                 createdAt: new Date().toISOString()
             };
             set((state) => ({

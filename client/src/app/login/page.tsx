@@ -17,8 +17,9 @@ export default function LoginPage() {
         try {
             await login({ email, password });
             router.push('/chat');
-        } catch (err: any) {
-            setError(err.response?.data?.message || 'Login failed');
+        } catch (err: unknown) {
+            const errorResponse = err as { response?: { data?: { message?: string } } };
+            setError(errorResponse.response?.data?.message || 'Login failed');
         }
     };
 

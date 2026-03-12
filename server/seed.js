@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const process = require('node:process');
 const User = require('./models/User');
 const Chat = require('./models/Chat');
 const Message = require('./models/Message');

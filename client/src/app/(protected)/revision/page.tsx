@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import {
     GraduationCap, Sparkles, BookOpen, Download,
-    Zap, Bookmark, CheckCircle, Share2, Printer, ArrowRight
+    Zap, Bookmark, Printer, ArrowRight
 } from 'lucide-react';
 import api from '@/lib/axios';
 import ReactMarkdown from 'react-markdown';
@@ -11,14 +11,14 @@ import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 
 export default function RevisionMode() {
-    const [subjects, setSubjects] = useState<any[]>([]);
+    const [subjects, setSubjects] = useState<{ name: string, topics: { name: string }[] }[]>([]);
     const [selectedSubject, setSelectedSubject] = useState('');
     const [selectedTopic, setSelectedTopic] = useState('');
     const [notes, setNotes] = useState('');
     const [loading, setLoading] = useState(false);
     const [saved, setSaved] = useState(false);
 
-    const [error, setError] = useState(false);
+    const [_error, setError] = useState(false);
 
     const fetchSubjects = async () => {
         setLoading(true);
@@ -110,7 +110,7 @@ export default function RevisionMode() {
                             disabled={!selectedSubject}
                         >
                             <option value="">Choose a topic...</option>
-                            {currentSubject?.topics?.map((t: any) => (
+                            {currentSubject?.topics?.map((t: { name: string }) => (
                                 <option key={t.name} value={t.name}>{t.name}</option>
                             ))}
                         </select>

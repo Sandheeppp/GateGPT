@@ -1,17 +1,24 @@
 import { create } from 'zustand';
 import api from '@/lib/axios';
 
+interface Question {
+    question: string;
+    options: string[];
+    correct: number;
+    explanation?: string;
+}
+
 interface Subject {
     _id: string;
     name: string;
     description: string;
-    topics?: any[];
-    questions?: any[];
+    topics?: string[];
+    questions?: Question[];
 }
 
 interface LearningState {
     subjects: Subject[];
-    stats: any;
+    stats: Record<string, { totalQuestions: number, totalScore: number }>;
     loading: boolean;
     error: boolean;
     lastFetched: number | null;

@@ -2,6 +2,7 @@ const Chat = require('../models/Chat');
 const Message = require('../models/Message');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const crypto = require('crypto');
+const process = require('node:process');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
@@ -42,7 +43,7 @@ const sendMessage = async (req, res) => {
 
     try {
         // Save user message
-        const userMessage = await Message.create({
+        await Message.create({
             chatId,
             role: 'user',
             content,
@@ -60,7 +61,8 @@ const sendMessage = async (req, res) => {
 
         // System prompt for GATE (Gemini doesn't have a direct 'system' role in startChat, 
         // it's usually part of the first message or instructions)
-        const systemInstruction = "You are GateGPT, an expert AI tutor for the GATE (Graduate Aptitude Test in Engineering) exam. You specialize in subjects like Data Structures, Algorithms, OS, DBMS, Computer Networks, and Mathematics. Provide step-by-step solutions, explain concepts clearly, and use LaTeX for mathematical formulas (e.g., $E=mc^2$ or $$x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$$).";
+        // System prompt for GATE
+        const _systemInstruction = "You are GateGPT, an expert AI tutor for the GATE (Graduate Aptitude Test in Engineering) exam. You specialize in subjects like Data Structures, Algorithms, OS, DBMS, Computer Networks, and Mathematics. Provide step-by-step solutions, explain concepts clearly, and use LaTeX for mathematical formulas (e.g., $E=mc^2$ or $$x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}$$).";
 
         const chat = model.startChat({
             history: chatHistory.slice(0, -1), // Everything except the current message

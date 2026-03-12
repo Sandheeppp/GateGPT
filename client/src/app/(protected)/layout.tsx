@@ -9,7 +9,7 @@ export default function ProtectedLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const { user, token } = useAuthStore();
+    const { token } = useAuthStore();
     const router = useRouter();
     const pathname = usePathname();
     const [isLoading, setIsLoading] = useState(() => {
