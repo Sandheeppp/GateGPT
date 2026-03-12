@@ -2,10 +2,6 @@
 
 GateGPT is a specialized AI-powered platform designed to assist students preparing for the **GATE (Graduate Aptitude Test in Engineering)**. It provides a chatbot interface, subject exploration, and various prep modes tailored for engineering students.
 
-## 🙌 Prepared By
-- **Sandheep G S** (CB.SC.U4CSE23144)
-- **Prajith Maharaja** (CB.SC.U4CSE23135)
-
 ## 🛠️ Project Structure
 
 The project is divided into two main components:
